@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xodimlarimiz - Gourmet Oasis</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-amber-50 text-gray-800 font-sans">
+
+    <!-- NAVIGATSIYA PANELI -->
+    {% include 'partials/navbar.html' %}
+
+    <!-- HERO SARLAVHA -->
+    <section class="relative bg-gray-900 text-white py-20">
+        <div class="absolute inset-0 z-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
+            <span class="text-amber-400 font-semibold tracking-widest uppercase text-sm">Oshpazlik San'atkorlari</span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">Bizning Jamoa</h1>
+            <p class="text-gray-300 max-w-xl mx-auto text-base">
+                Siz uchun har kuni ajoyib taomlar va yuqori darajadagi xizmat ko'rsatadigan professional mutaxassislarimiz bilan tanishing.
+            </p>
+        </div>
+    </section>
+
+    <!-- XODIMLAR RO'YXATI -->
+    <section class="py-20 bg-amber-50/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                {%for i in xodimlar%}
+                <!-- Xodim 1 -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-amber-100 text-center space-y-4 hover:shadow-lg transition duration-300 group">
+                        <div class="relative w-36 h-36 mx-auto overflow-hidden rounded-full border-4 border-amber-500/20 group-hover:border-amber-500 transition">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition duration-300" src="{{ i.image.url }}" alt="Chef">
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">{{ i.fio }}</h3>
+                            <p class="text-xs text-amber-600 font-semibold uppercase tracking-wider mt-1">{{ i.get_position_display }}</p>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            {{ i.info }}
+                        </p>
+                        <div class="pt-2 flex justify-center space-x-3 text-gray-400">
+                            <a href="#" class="hover:text-amber-600 transition"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="hover:text-amber-600 transition"><i class="fa-brands fa-telegram"></i></a>
+                            <a href="#" class="hover:text-amber-600 transition"><i class="fa-brands fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 text-sm">
+            <p class="text-white font-bold tracking-widest text-lg">GOURMET OASIS</p>
+            <p>&copy; 2026 Gourmet Oasis. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

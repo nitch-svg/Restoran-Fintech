@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Oasis - Bizning Menyu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-amber-50 text-gray-800 font-sans">
+
+    {% include 'partials/navbar.html'%}
+
+    <section class="relative bg-gray-900 text-white py-12 flex items-center justify-center text-center">
+        <div class="absolute inset-0 z-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 space-y-2">
+            <span class="text-amber-400 font-semibold tracking-widest uppercase text-xs">Eksklyuziv Taomnoma</span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-amber-500">Gourmet Oasis Menyusi</h1>
+        </div>
+    </section>
+
+    <div class="sticky top-20 z-40 bg-amber-50/80 backdrop-blur-md py-4 border-b border-amber-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 flex overflow-x-auto gap-3 no-scrollbar">
+            {% for i in categories %}
+                <a href="#{{i.slug}}" class="bg-white hover:bg-amber-100 text-amber-900 border border-amber-200 px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition">{{i.name}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+        {% for ctg in categories %}
+        {% if ctg.foods.all %}
+
+            <section id="{{ ctg.slug }}" class="scroll-mt-36">
+                <div class="border-b-2 border-amber-500/20 pb-3 mb-8 flex items-center space-x-3">
+                    <i class="fa-solid fa-utensils text-amber-600 text-2xl"></i>
+                    <h2 class="text-2xl font-extrabold text-gray-900 tracking-wide uppercase">{{ ctg.name }}</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    {% for ovqat in ctg.foods.all %}
+                        <div class="bg-white rounded-2xl overflow-hidden border border-amber-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                            <img class="h-40 w-full object-cover" src="{{ovqat.image.url}}" alt="Mol go'shtli lavash">
+                            <div class="p-4 space-y-2 flex-grow">
+                                <h3 class="font-bold text-gray-900">{{ ovqat.name }}</h3>
+                                <p class="text-xs text-gray-600 line-clamp-2">{{ ovqat.info }}</p>
+                            </div>
+                            <div class="p-4 pt-0 flex justify-between items-center">
+                                {% if ovqat.discount %}
+                                    <del class="text-red-600 font-extrabold text-sm">{{ ovqat.price }}</del>
+                                    <span class="text-green-600 font-extrabold text-sm">-{{ ovqat.discount }}%</span>
+                                    <span class="text-amber-600 font-extrabold text-sm">{{ ovqat.get_price }}</span>
+                                
+                                {% else %}
+                                    <span class="text-amber-600 font-extrabold text-sm">{{ ovqat.get_price }}</span>
+                                {% endif %}
+                                <a href="{% url 'add_savat' ovqat_id=ovqat.id %}?url=menu" class="bg-amber-600 hover:bg-amber-700 text-white p-2 rounded-full text-xs transition">
+                                    <i class="fa-solid fa-plus px-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </section>
+        
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <footer id="contact" class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 text-sm">
+            <p class="text-white font-bold tracking-widest text-lg">GOURMET OASIS</p>
+            <p>&copy; 2026 Gourmet Oasis. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

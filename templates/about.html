@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biz haqimizda - Gourmet Oasis</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-amber-50 text-gray-800 font-sans">
+
+    <!-- NAVIGATSIYA PANELI -->
+    {% include 'partials/navbar.html'%}
+
+    <!-- HERO / SARLAVHA QISMI -->
+    <section class="relative bg-gray-900 text-white py-24">
+        <div class="absolute inset-0 z-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-amber-400 font-semibold tracking-widest uppercase text-sm">Bizning Tariximiz</span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mt-2">Biz Haqimizda</h1>
+            <p class="text-gray-300 max-w-2xl mx-auto mt-4 text-base sm:text-lg">
+                Shinam muhit, yuqori sifatli mahsulotlar va haqiqiy oshpazlik mahorati jamlangan maskan.
+            </p>
+        </div>
+    </section>
+
+    <!-- BIZNING HIKOYA VA TUSHUNCHA -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img class="rounded-2xl shadow-xl w-full h-[450px] object-cover" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Gourmet Oasis Restorani Interyeri">
+                    <div class="absolute -bottom-6 -right-6 bg-amber-500 text-white p-6 rounded-2xl shadow-lg hidden sm:block">
+                        <p class="text-3xl font-extrabold">10+</p>
+                        <p class="text-xs uppercase tracking-wider font-medium">Yillik Tajriba</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">Lazzat Falsafasi</span>
+                    <h2 class="text-3xl font-bold text-gray-950 sm:text-4xl">Har Bir Taomda Unutilmas Ta'm Qadrini Yaratamiz</h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Gourmet Oasis 2016-yilda kichik, lekin orzulari katta bo'lgan oilaviy restoran sifatida o'z faoliyatini boshlagan. Bugungi kunda esa shahrimizning bir nechta nuqtalarida mehmonlarga premium darajadagi taomlarni taqdim etib kelmoqdamiz.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Bizning bosh maqsadimiz — faqatgina qorin toydirish emas, balki har bir tashrif buyuruvchiga estetik va gastronomik zavq bag'ishlashdir. Barcha masalliqlarimiz har kuni yangi uzilgan holda saralanadi va malakali oshpazlarimiz tomonidan tayyorlanadi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AFZALLIKLAR / USTUNLIKLAR -->
+    <section class="py-20 bg-amber-50/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm">Nega Biz?</span>
+            <h2 class="text-3xl font-bold text-gray-950 sm:text-4xl mt-2 mb-12">Asosiy Ustunliklarimiz</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 1-Afzallik -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-amber-100 text-center space-y-4 hover:shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Yangilik va Sifat</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">Taomlarimiz uchun faqat tabiiy, toza va har kuni yangilangan ingredientlardan foydalanamiz.</p>
+                </div>
+
+                <!-- 2-Afzallik -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-amber-100 text-center space-y-4 hover:shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-user-ninja"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Xalqaro Oshpazlar</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">Jamoamizda ko'p yillik tajribaga ega bo'lgan mahoratli va xalqaro toifadagi chef-oshpazlar mehnat qiladi.</p>
+                </div>
+
+                <!-- 3-Afzallik -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-amber-100 text-center space-y-4 hover:shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto">
+                        <i class="fa-solid fa-face-smile"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900">Yuqori Xizmat Sifati</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">Har bir mehmonimizga alohida e'tibor ko'rsatish va samimiy xizmat ko'rsatish — bizning doimiy qoidamiz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATISTIKA QISMI -->
+    <section class="py-16 bg-amber-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="space-y-2">
+                    <p class="text-4xl font-extrabold">15,000+</p>
+                    <p class="text-amber-100 text-sm font-medium">Mamnun Mijozlar</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-4xl font-extrabold">50+</p>
+                    <p class="text-amber-100 text-sm font-medium">Noyob Taomlar</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-4xl font-extrabold">5</p>
+                    <p class="text-amber-100 text-sm font-medium">Shahar Filiallari</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-4xl font-extrabold">30+</p>
+                    <p class="text-amber-100 text-sm font-medium">Professional Xodimlar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 text-sm">
+            <p class="text-white font-bold tracking-widest text-lg">GOURMET OASIS</p>
+            <p>&copy; 2026 Gourmet Oasis. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savat - Gourmet Oasis</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome (Иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-amber-50 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- NAVIGATSIYA PANELI -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-amber-600 tracking-wider">GOURMET OASIS</a>
+                </div>
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-6 font-medium">
+                        <a href="{% url 'home' %}" class="text-gray-600 hover:text-amber-600 transition text-sm">Bosh sahifa</a>
+                        <a href="{% url 'about_us' %}" class="text-gray-600 hover:text-amber-600 transition text-sm">Biz haqimizda</a>
+                        <a href="{% url 'menu' %}" class="text-gray-600 hover:text-amber-600 transition text-sm">Menyu</a>
+                        <a href="{% url 'xodimlar'%}" class="text-gray-600 hover:text-amber-600 transition text-sm">Xodimlarimiz</a>
+                        <a href="{% url 'branch'%}" class="text-gray-600 hover:text-amber-600 transition text-sm">Filiallar</a>
+                        <a href="{% url 'aloqa'%}" class="text-gray-600 hover:text-amber-600 transition text-sm">Aloqa</a>                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Кнопка корзины в шапке -->
+                    <a href="cart.html" class="relative p-2 text-amber-600 hover:text-amber-700 transition">
+                        <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">{{savat_count}}</span>
+                    </a>
+                    <a href="contact.html" class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-md transition">Stol band qilish</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT (Действующие заказы / Корзина) -->
+    <main class="py-12 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="mb-8">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Sizning Savatingiz</h1>
+                <p class="text-sm text-gray-600 mt-1">Hozir tanlayotgan taomlaringiz ro'yxati va buyurtma tasdiqlash.</p>
+            </div>
+
+            <!-- СЕТКА С ТОВАРАМИ И ЧЕКОМ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. СПИСОК ВЫБРАННЫХ БЛЮД -->
+                <div class="lg:col-span-2 space-y-4">
+                    
+                    {% for i in maxsulotlar %}
+                    <!-- Блюдо 1 -->
+                        <div class="bg-white p-4 sm:p-6 rounded-2xl border border-amber-100 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="flex items-center space-x-4 w-full sm:w-auto">
+                                <img src="{{ i.ovqat.image.url }}" alt="" class="w-20 h-20 rounded-xl object-cover border border-gray-100 flex-shrink-0">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">{{i.ovqat.name}}</h3>
+                                    <p class="text-xs text-gray-500">Dona narxi: 
+                                        {% if i.ovqat.discount %}
+                                            <span class="font-semibold text-green-600">{{ i.ovqat.get_price }} UZS</span>
+                                        {% else %}
+                                            <span class="font-semibold text-amber-600">{{ i.ovqat.get_price }} UZS</span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto space-x-6">
+                                <!-- Количество -->
+                                <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+                                    <a href="{% url 'remove_savat' savat_id=i.id %}" class="px-3 py-1 bg-white text-gray-600 hover:bg-amber-100 font-bold text-sm">-</a>
+                                    <span class="px-3 py-1 text-sm font-bold text-gray-800">{{i.quantity}}</span>
+                                    <a href="{% url 'add_savat' ovqat_id=i.ovqat.id  %}" class="px-3 py-1 bg-white text-gray-600 hover:bg-amber-100 font-bold text-sm">+</a>
+                                </div>
+
+                                <!-- Итого за позицию (total_price) -->
+                                <div class="text-right">
+                                    <p class="text-xs text-gray-400 uppercase font-semibold">Jami</p>
+                                    <p class="text-lg font-extrabold text-amber-600">{{i.get_total_price}}</p>
+                                </div>
+
+                                <!-- Удалить -->
+                                <a href="{% url 'delete_one_savat' savat_id=i.id one_delete=1 %}" class="text-gray-400 hover:text-red-500 transition p-1">
+                                    <i class="fa-solid fa-trash-can text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                    <div class="pt-2">
+                        <a href="menu.html" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-700 transition">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Menyuga qaytish va yangi taom qo'shish
+                        </a>
+                        <a href="{%url 'clear_savat' %}" class="ml-20 inline-flex items-center text-sm font-semibold text-red-500 hover:text-red-700 transition">
+                            <i class="fa-solid fa-trash-can mr-2"></i> Savatni tozalash
+                        </a>
+                    </div>
+
+                </div>
+
+            <!-- Buyurtma xulosasi va rasmiylashtirish (O'ng tomon) -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm space-y-6 sticky top-28">
+                    <h3 class="text-lg font-extrabold text-gray-900 uppercase tracking-wide border-b border-amber-100 pb-3">Buyurtma xulosasi</h3>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Mahsulotlar qiymati:</span>
+                            <span class="font-bold text-gray-900">{{ absolute_total_price }} so'm</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Yetkazib berish (10%):</span>
+                            <span class="font-bold text-gray-900">10 000 so'm</span>
+                        </div>
+                        <div class="border-t border-amber-100 pt-3 flex justify-between text-base font-extrabold">
+                            <span class="text-gray-900">Jami to'lov:</span>
+                            <span class="text-amber-600 text-lg">{{ with_dostavka }} so'm</span>
+                        </div>
+                    </div>
+
+                    <!-- Ma'lumot kiritish formasi -->
+                    <form class="space-y-4 pt-2" method='post' action="{%url 'order'%}">
+                        {%csrf_token%}
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Ismingiz</label>
+                            <input name='ism' type="text" placeholder="Masalan: Alisher" required class="w-full px-4 py-2.5 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-600 text-sm bg-amber-50/30">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Telefon raqam</label>
+                            <input name='phone' type="tel" placeholder="+998 90 123 45 67" required class="w-full px-4 py-2.5 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-600 text-sm bg-amber-50/30">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Yetkazib berish manzili</label>
+                            <textarea name='address' rows="2" placeholder="Ko'cha, uy raqami, mo'ljal..." required class="w-full px-4 py-2.5 rounded-xl border border-amber-200 focus:outline-none focus:border-amber-600 text-sm bg-amber-50/30 resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-xl font-semibold shadow-md hover:shadow-lg transition duration-300 text-center block">
+                            Buyurtmani tasdiqlash
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+
+                </div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2 text-sm">
+            <p class="text-white font-bold tracking-widest text-lg">GOURMET OASIS</p>
+            <p>&copy; 2026 Gourmet Oasis. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

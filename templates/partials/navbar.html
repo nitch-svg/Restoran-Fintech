@@ -1,0 +1,23 @@
+<nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-amber-600 tracking-wider">GOURMET OASIS</a>
+                </div>
+                <div class="hidden lg:block">
+                    <div class="ml-10 flex items-baseline space-x-6 font-medium">
+                        {% for i in links %}
+                            <a href="{% url i.url_name %}" class="{{i.class}}">{{ i.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{{savat_count}}" class="relative p-2 text-gray-600 hover:text-amber-600 transition">
+                        <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">2</span>
+                    </a>
+                    <a href="index.html#branches" class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition duration-300">Stol band qilish</a>
+                </div>
+            </div>
+        </div>
+</nav>
